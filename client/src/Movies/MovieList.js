@@ -7,7 +7,7 @@ function MovieList({ movies }) {
     <div className="movie-list">
       {
         movies.map(movie => (
-          <Link key={movie.id} to={`/movies/${movie.id}`}>
+          <Link to={`/movies/${movie.id}`}>
             <MovieCard movie={movie} />
           </Link>
         ))
