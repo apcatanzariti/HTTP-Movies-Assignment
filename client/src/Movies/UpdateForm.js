@@ -3,8 +3,8 @@ import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 import styled from 'styled-components';
 
-function UpdateForm () {
-    const [movie, setMovie] = useState(null);
+function UpdateForm (props) {
+    const [movie, setMovie] = useState();
 
     const params = useParams();
     const history = useHistory();
@@ -35,7 +35,16 @@ function UpdateForm () {
 
     function submitChange(e) {
         e.preventDefault();
-        console.log(movie);
+        axios
+        .put(`http://localhost:5000/api/movies/${params.id}`, movie)
+        .then(res => {
+            // props.setMovieList([res.data]);
+            props.setMovieList(props.movieList);
+            history.push(`/movies/${params.id}`);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     };
 
     if (!movie) {
